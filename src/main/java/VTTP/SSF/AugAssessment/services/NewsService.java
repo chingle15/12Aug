@@ -29,12 +29,14 @@ import jakarta.json.JsonReader;
 public class NewsService {
     private static final String URL = "https://min-api.cryptocompare.com/data/v2/news/?lang=EN";
 
+    private static final String payload = null;
+
     @Autowired
     private NewsRepository newsRepo;
 
     public List<News> getArticles(String newsId) {
 
-        Optional<String> opt = newsRepo.get(newsId);
+        //Optional<String> opt = newsRepo.get(newsId);
         String payload;
 
         System.out.printf(">>> newsId: %s\n", newsId);
@@ -42,7 +44,7 @@ public class NewsService {
             try {
                 String url = UriComponentsBuilder.fromUriString(URL)
                     .queryParam("q", URLEncoder.encode(newsId, "UTF-8"))
-                    .queryParam("appid", key)
+                    .queryParam("appid")
                     .toUriString();
 
                 RequestEntity<Void> req = RequestEntity.get(url).build();
@@ -55,21 +57,23 @@ public class NewsService {
                 resp = template.exchange(req, String.class);
 
                 
-                payload = resp.getBody();
-                System.out.println("payload: " + payload);} }
+               // payload = resp.getBody();
+                //System.out.printf("payload: ", payload )
+            } 
+            }
 
                 public List<News> saveArticles(String news){
 
-                newsRepo.save(newsId, payload);
-             catch (Exception ex) {
-                System.err.printf("Error: %s\n", ex.getMessage());
-                return Collections.emptyList();
-            }
-         else {
+               // newsRepo.save(newsId, payload);
+        //      catch (Exception ex) {
+        //         System.err.printf("Error: %s\n", ex.getMessage());
+        //         return Collections.emptyList();
+        //     }
+        //  else {
             
-            payload = opt.get();
-            System.out.printf(">>>> cache: %s\n", payload);
-        } }
+        //     payload = opt.get();
+        //     System.out.printf(">>>> cache: %s\n", payload);
+        // } }
 
     
         Reader strReader = new StringReader(payload);
@@ -79,11 +83,12 @@ public class NewsService {
         JsonObject newsResult = jsonReader.readObject();
         JsonArray newsId = newsResult.getJsonArray("news");
         List<News> list = new LinkedList<>();
-        for (int i = 0; i < newsID.size(); i++) {
+        for (int i = 0; i < newsId.size(); i++) {
             JsonObject jo = newsId.getJsonObject(i);
             list.add(((News) newsId).create(jo));
         }
         return list;
     }
+}
     
 

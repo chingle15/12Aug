@@ -22,15 +22,16 @@ public class NewsController {
     @GetMapping
     public String getArticles(Model model, @RequestParam String City) {
 
-        List<News> news = newsSvc.getArticles(id);
-        model.addAttribute("id", id);
-        model.addAttribute("published_on", published_on);
-        model.addAttribute("title", title);
-        model.addAttribute("url", url);
-        model.addAttribute("imageurl", imageurl);
-        model.addAttribute("body", body);
-        model.addAttribute("tags", tags);
-        model.addAttribute("categories", categories);
+        // Getting errors here
+        // List<News> news = newsSvc.getArticles(id);
+        // model.addAttribute("id", id);
+        // model.addAttribute("published_on", published_on);
+        // model.addAttribute("title", title);
+        // model.addAttribute("url", url);
+        // model.addAttribute("imageurl", imageurl);
+        // model.addAttribute("body", body);
+        // model.addAttribute("tags", tags);
+        // model.addAttribute("categories", categories); 
 
         
         return "news";

@@ -11,6 +11,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
 
+import jakarta.json.JsonArray;
+
 
 @Repository
 public class NewsRepository {
@@ -19,7 +21,7 @@ public class NewsRepository {
     @Qualifier("redislab")
     private RedisTemplate<String, String> redisTemplate;
 
-    public void save(String newsID, String payload) {
+    public void save(JsonArray newsId, String payload) {
         ValueOperations<String, String> valueOp = redisTemplate.opsForValue();
     }
 

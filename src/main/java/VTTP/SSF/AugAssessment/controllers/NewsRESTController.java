@@ -25,21 +25,22 @@ public class NewsRESTController {
     @Autowired
     private NewsService newsSvc;
 
-    @GetMapping(produces = "application/json")
-    public ResponseEntity<String> getArticlesAsCSV (
-        @PathVariable(name="newsId") String newsId) {
-            ResponseEntity<String> name = getArticlesAsCSV(newsId);
-            if (newsId ==null || !newsId.startsWith(PACKAGE_ID)){
-                String error =  " error :  Cannot find news article %s".formatted(newsId);
+    // Errors here
+    // @GetMapping(produces = "application/json")
+    // public ResponseEntity<String> getArticlesAsCSV (
+    //     @PathVariable(name="newsId") String newsId) {
+    //         ResponseEntity<String> name = getArticlesAsCSV(newsId);
+    //         if (newsId ==null || !newsId.startsWith(PACKAGE_ID)){
+    //             String error =  " error :  Cannot find news article %s".formatted(newsId);
 
-                return ResponseEntity
-                .badRequest()
-                .body(error);
+            //     return ResponseEntity
+            //     .badRequest()
+            //     .body(error);
 
-            }
+            // }
 
-        }
-        @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+        // }
+        // @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
         public ResponseEntity<String> getArticlesAsJson(
                 @RequestParam(name = "newsId") String newsId) {
     
@@ -55,21 +56,20 @@ public class NewsRESTController {
                         .body(payload);
             }
             
-            List<Integer> rolls = newsSvc.roll(newsId);
     
         
             JsonObjectBuilder builder = Json
                     .createObjectBuilder()
-                    .add("count", count);
+                    .add("newsId", newsId);
     
-            // Create a JsonArray
+            
             JsonArrayBuilder arrBuilder = Json.createArrayBuilder();
-            for (Integer d: rolls)
-                arrBuilder.add(d);
-            // Add JsonArray (rolls) to the respose
-            builder = builder.add("rolls", arrBuilder);
+            // for (String n: news)
+                // arrBuilder.add(n);
+        
+            builder = builder.add("news", arrBuilder);
     
-            // Get the JsonObject object from JsonBuilder
+
             JsonObject resp = builder.build();
     
             return ResponseEntity.ok(resp.toString());
