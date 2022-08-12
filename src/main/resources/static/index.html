@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto News of the day</title>
+</head>
+<body>
+    <div class="center-it" style="margin-top: 10vh;">
+            <h1>Crypto News of the Day</h1>
+            </div>
+        <p>
+        <table>
+            <tr data-th-each="newsarticle: ${News}">
+                <td data-th-text="${newsarticle.id}"></td>
+                <td data-th-text="${newsarticle.published_on}"></td>
+                <td data-th-text="${newsarticle.title}"></td>
+                <td data-th-text="${newsarticle.url}"></td>
+                <td data-th-text="${newsarticle.imageurl}"></td>
+                <td data-th-text="${newsarticle.body}"></td>
+                <td data-th-text="${newsarticle.tags}"></td>
+                <td data-th-text="${newsarticle.categories}"></td>
+            </tr>
+                <input type="checkbox" id="checkbutton" name="checkbutton" value="check">
+                <label for="checkbutton"> </label><br>
+                <form action = "" method="post">
+                    <button name="foo" value="Save">Save</button>
+                </form>
+        </table>
+    </p>
+    <script type="text/javascript">
+      
+        let htmlElements =
+            document.getElementsByTagName("p");
+  
+        for (let i = 0; i < htmlElements.length; i++) {
+  
+            console.log(htmlElements[i]);
+        }
+    </script>
+</body>
+</html>
